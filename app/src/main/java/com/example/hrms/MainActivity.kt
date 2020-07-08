@@ -7,7 +7,9 @@ import com.example.hrms.activitys.Department
 import com.example.hrms.activitys.Employee
 import com.example.hrms.activitys.Salary
 import com.example.hrms.common.RouteUtils
+import com.example.hrms.model.JdbcManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,5 +23,17 @@ class MainActivity : AppCompatActivity(){
                 attendance -> RouteUtils.gotoActivity(this, Attendance::class.java)
             }
         }
+        var thread=Thread {
+            JdbcManager.init()
+        }
+        thread?.let {
+            it.priority=Thread.MAX_PRIORITY
+            it.start()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        JdbcManager.onDestroy()
     }
 }

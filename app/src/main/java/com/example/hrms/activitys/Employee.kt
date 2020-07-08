@@ -31,16 +31,16 @@ class Employee : AppCompatActivity(), Iview {
         employeeAdapter = EmployeeAdapter()
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);//错位布局
         c.setOnClickListener {//增
-            RouteUtils.gotoActivity(this, AlertDialogEmployeeActivity::class.java)
+            RouteUtils.gotoInsertEmployeeActivity(this)
         }
         r.setOnClickListener {//查
             presenter.getAdapterbyQuery(EmployeeEntity(), query)
         }
         u.setOnClickListener {//改
-
+            RouteUtils.gotoUpdateEmployeeActivity(this)
         }
         d.setOnClickListener {//删
-
+            RouteUtils.gotoDeleteEmployeeActivity(this)
         }
     }
 

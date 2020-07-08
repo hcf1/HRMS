@@ -1,5 +1,6 @@
 package com.example.hrms.presenter;
 
+import com.example.hrms.common.RouteUtils;
 import com.example.hrms.entity.DefaultEntity;
 import com.example.hrms.entity.EmployeeEntity;
 import com.example.hrms.model.JdbcManager;
@@ -62,8 +63,8 @@ public class Presenter {
         compositeSubscription.add(subscription);
     }
 
-    public void insertInToDataBase(String query) {
-        Subscription subscription=JdbcManager.insert(query)
+    public void updateDataBase(String query) {
+        Subscription subscription=JdbcManager.executeUpdate(query)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Action1<DefaultEntity>() {
                     @Override

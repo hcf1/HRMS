@@ -4,6 +4,50 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical">
+
+    <TextView
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="按条件删除，不填则不筛选该项"
+        android:id="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/enoItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/eno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:singleLine="false"
+            android:text="员工ID" />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="#bfc6dc">
+
+        </View>
+
+        <EditText
+            android:id="@+id/enoValue"
+            android:hint="ID作为某一用户的的唯一标识"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:text="" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,9 +56,9 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:singleLine="false"
             android:text="姓名" />
 
@@ -34,6 +78,7 @@
             android:singleLine="false"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,9 +87,9 @@
 
         <TextView
             android:id="@+id/gender"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:singleLine="false"
             android:text="性别" />
 
@@ -64,6 +109,7 @@
             android:singleLine="false"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,9 +118,9 @@
 
         <TextView
             android:id="@+id/age"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:singleLine="false"
             android:text="年龄" />
 
@@ -94,6 +140,7 @@
             android:singleLine="false"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,9 +149,9 @@
 
         <TextView
             android:id="@+id/addr"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:singleLine="false"
             android:text="籍贯" />
 
@@ -124,6 +171,7 @@
             android:singleLine="false"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

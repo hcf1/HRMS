@@ -1,18 +1,18 @@
 package com.example.hrms.employee
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hrms.R
+import com.example.hrms.common.RouteUtils
 import com.example.hrms.presenter.Presenter
 import com.example.hrms.view.Iview
 import kotlinx.android.synthetic.main.activity_alert_dialog_employee.*
 
-class AlertDialogEmployeeActivity (): AppCompatActivity() ,Iview{
-    private var query="INSERT INTO emp (name,gender,age,addr) VALUES ('998i','male',30,'北京');"
-    lateinit var presenter:Presenter
+class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
+    private var query:String = ""
+    lateinit var presenter: Presenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert_dialog_employee)
@@ -21,16 +21,62 @@ class AlertDialogEmployeeActivity (): AppCompatActivity() ,Iview{
 
     private fun initView() {
         presenter = Presenter(this)
+        if (intent.extras != null) {
+            when (intent.extras!!.getInt("tag")) {
+                RouteUtils.UPDATE -> {
+                    enoItem.visibility = View.VISIBLE
+                    this.title = "修改员工信息"
+                }
+                RouteUtils.DELETE -> {
+                    enoItem.visibility = View.VISIBLE
+                    hint.visibility=View.VISIBLE
+                    this.title="删除员工"
+                }
+            }
+        }
         positive.setOnClickListener {
-            val name=nameValue.text.toString()
-            val gender=genderValue.text.toString()
-            val age=ageValue.text.toString()
-            val addr=addrValue.text.toString()
-            query= "INSERT INTO emp (name,gender,age,addr) VALUES ('$name','$gender',$age,'$addr');"
-            presenter.insertInToDataBase(query)
+            val eno = enoValue.text.toString()
+            val name = nameValue.text.toString()
+            val gender = genderValue.text.toString()
+            val age = ageValue.text.toString()
+            val addr = addrValue.text.toString()
+            if (intent.extras != null) {
+                when (intent.extras!!.getInt("tag")) {
+                    RouteUtils.INSERT -> {
+                        query = "INSERT INTO emp (name,gender,age,addr) VALUES ('$name','$gender',$age,'$addr');"
+                        presenter.updateDataBase(query)
+                    }
+                    RouteUtils.UPDATE -> {
+                        query = "UPDATE emp SET name = '$name',gender='$gender',age=$age,addr='$addr' WHERE eno = '$eno'"
+                        presenter.updateDataBase(query)
+                    }
+                    RouteUtils.DELETE->{
+//                        query="DELETE FROM emp WHERE ENO=$eno AND NAME='$name' AND gender='$gender' and age=$age and addr='$addr'"
+                        query="DELETE FROM emp WHERE "
+                        if (eno != "") {
+                            query+="ENO=$eno AND "
+                        }
+                        if (name!="") {
+                            query+="NAME='$name' AND "
+                        }
+                        if (gender != "") {
+                            query+="gender='$gender' and "
+                        }
+                        if (age != "") {
+                            query+="age=$age and "
+                        }
+                        if (addr != "") {
+                            query += "addr='$addr'"
+                        } else {
+                            query+="true"
+                        }
+                        presenter.updateDataBase(query)
+                    }
+                }
+            }
             finish()
         }
-        negative.setOnClickListener{
+        negative.setOnClickListener {
             finish()
         }
     }
@@ -40,6 +86,6 @@ class AlertDialogEmployeeActivity (): AppCompatActivity() ,Iview{
     }
 
     override fun setDataSuccess(isSuccess: Boolean?) {
-        Log.d("hechangfei","")
+        Log.d("hechangfei", "")
     }
 }
