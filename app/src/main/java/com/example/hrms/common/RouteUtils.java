@@ -3,6 +3,7 @@ package com.example.hrms.common;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.hrms.department.AlertDialogDepartmentActivity;
 import com.example.hrms.employee.AlertDialogEmployeeActivity;
 
 public class RouteUtils {
@@ -29,6 +30,23 @@ public class RouteUtils {
 
     public static void gotoDeleteEmployeeActivity(Context activity) {
         Intent intent = new Intent(activity, AlertDialogEmployeeActivity.class);
+        intent.putExtra("tag", DELETE);
+        activity.startActivity(intent);
+    }
+    public static void gotoInsertDepartmentActivity(Context activity) {
+        Intent intent = new Intent(activity, AlertDialogDepartmentActivity.class);
+        intent.putExtra("tag", INSERT);
+        activity.startActivity(intent);
+    }
+
+    public static void gotoUpdateDepartmentActivity(Context activity) {
+        Intent intent = new Intent(activity, AlertDialogDepartmentActivity.class);
+        intent.putExtra("tag", UPDATE);
+        activity.startActivity(intent);
+    }
+
+    public static void gotoDeleteDepartmentActivity(Context activity) {
+        Intent intent = new Intent(activity, AlertDialogDepartmentActivity.class);
         intent.putExtra("tag", DELETE);
         activity.startActivity(intent);
     }

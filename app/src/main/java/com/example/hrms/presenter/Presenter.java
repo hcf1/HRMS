@@ -2,6 +2,7 @@ package com.example.hrms.presenter;
 
 import com.example.hrms.common.RouteUtils;
 import com.example.hrms.entity.DefaultEntity;
+import com.example.hrms.entity.DepartmentEntity;
 import com.example.hrms.entity.EmployeeEntity;
 import com.example.hrms.model.JdbcManager;
 import com.example.hrms.view.Iview;
@@ -46,6 +47,14 @@ public class Presenter {
                                     employeeEntity.mail = resultSet.getString(6);
                                     employeeEntity.phone = resultSet.getString(7);
                                     list.add((T) employeeEntity);
+                                }
+                                if (t.getClass().getName().equals(DepartmentEntity.class.getName())) {
+                                    DepartmentEntity departmentEntity = new DepartmentEntity();
+                                    departmentEntity.dno = resultSet.getInt(1);
+                                    departmentEntity.name = resultSet.getString(2);
+                                    departmentEntity.eno = resultSet.getInt(3);
+                                    departmentEntity.time = resultSet.getString(4);
+                                    list.add((T) departmentEntity);
                                 }
 
                             } catch (SQLException e) {

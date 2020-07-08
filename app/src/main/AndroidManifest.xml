@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:label="添加员工"
+            android:name=".department.AlertDialogDepartmentActivity"
+            android:label="增加部门"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
+        <activity
             android:name=".employee.AlertDialogEmployeeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog">
-        </activity>
+            android:label="添加员工"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
         <activity android:name=".activitys.Attendance" />
         <activity android:name=".activitys.Salary" />
         <activity android:name=".activitys.Department" />
