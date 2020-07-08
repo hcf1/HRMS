@@ -19,5 +19,7 @@ class EmployeeViewHolder(itemView: View) : ViewHolder(itemView) {
     public var phoneValue: TextView = itemView.findViewById(R.id.phoneValue)
     public var eno: TextView = itemView.findViewById(R.id.eno)
     public var enoValue: TextView = itemView.findViewById(R.id.enoValue)
+    public var dname: TextView = itemView.findViewById(R.id.dname)
+    public var dnameValue: TextView = itemView.findViewById(R.id.dnameValue)
 
 }

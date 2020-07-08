@@ -36,6 +36,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
         holder.getMailValue().setText(employeeEntity.phone);
         holder.getEno().setText("员工ID");
         holder.getEnoValue().setText(String.valueOf(employeeEntity.eno));
+        holder.getDname().setText("部门");
+        holder.getDnameValue().setText(String.valueOf(employeeEntity.dname));
     }
 
     @Override

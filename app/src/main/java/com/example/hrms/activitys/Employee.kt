@@ -1,7 +1,8 @@
 package com.example.hrms.activitys
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.hrms.R
 import com.example.hrms.common.RouteUtils
@@ -13,7 +14,7 @@ import com.example.hrms.view.adapter.EmployeeAdapter
 import kotlinx.android.synthetic.main.activity_employee.*
 
 class Employee : AppCompatActivity(), Iview {
-    private val query = "SELECT * FROM emp"
+    private var query = "SELECT * FROM emp"
     lateinit var presenter: Presenter
     lateinit var employeeAdapter: EmployeeAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +35,25 @@ class Employee : AppCompatActivity(), Iview {
             RouteUtils.gotoInsertEmployeeActivity(this)
         }
         r.setOnClickListener {//查
-            presenter.getAdapterbyQuery(EmployeeEntity(), query)
+            var intent = Intent(this, AlertDialogEmployeeActivity::class.java)
+            intent.putExtra("tag", RouteUtils.RETRIEVER)
+            this.startActivityForResult(intent, 110)
         }
         u.setOnClickListener {//改
             RouteUtils.gotoUpdateEmployeeActivity(this)
         }
         d.setOnClickListener {//删
             RouteUtils.gotoDeleteEmployeeActivity(this)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 110 && resultCode == 110) {
+            if (data != null) {
+                query = data.getStringExtra("query").toString()
+            }
+            presenter.getAdapterbyQuery(EmployeeEntity(), query)
         }
     }
 

@@ -46,6 +46,7 @@ public class Presenter {
                                     employeeEntity.addr = resultSet.getString(5);
                                     employeeEntity.mail = resultSet.getString(6);
                                     employeeEntity.phone = resultSet.getString(7);
+                                    employeeEntity.dname = resultSet.getString(8);
                                     list.add((T) employeeEntity);
                                 }
                                 if (t.getClass().getName().equals(DepartmentEntity.class.getName())) {

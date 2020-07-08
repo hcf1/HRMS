@@ -11,7 +11,7 @@ import com.example.hrms.view.Iview
 import kotlinx.android.synthetic.main.activity_alert_dialog_employee.*
 
 class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
-    private var query:String = ""
+    private var query: String = ""
     lateinit var presenter: Presenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +23,18 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
         presenter = Presenter(this)
         if (intent.extras != null) {
             when (intent.extras!!.getInt("tag")) {
+                RouteUtils.RETRIEVER -> {
+                    dnoItem.visibility = View.VISIBLE
+                    this.title = "查询员工"
+                }
                 RouteUtils.UPDATE -> {
                     enoItem.visibility = View.VISIBLE
                     this.title = "修改员工信息"
                 }
                 RouteUtils.DELETE -> {
                     enoItem.visibility = View.VISIBLE
-                    hint.visibility=View.VISIBLE
-                    this.title="删除员工"
+                    hint.visibility = View.VISIBLE
+                    this.title = "删除员工"
                 }
             }
         }
@@ -40,8 +44,37 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
             val gender = genderValue.text.toString()
             val age = ageValue.text.toString()
             val addr = addrValue.text.toString()
+            var dno=dnoValue.text.toString()
             if (intent.extras != null) {
                 when (intent.extras!!.getInt("tag")) {
+                    RouteUtils.RETRIEVER -> {
+                        query = ""
+//                        "SELECT emp.eno,emp.name,emp.gender,emp.age,emp.addr,emp.mail,emp.phonenum,dept.dname FROM emp,dept WHERE emp.eno=1"
+                        query = "SELECT emp.eno,emp.name,emp.gender,emp.age,emp.addr,emp.mail,emp.phonenum,dept.dname FROM emp,dept WHERE "
+                        if (eno != "") {
+                            query += "ENO=$eno AND "
+                        }
+                        if (name != "") {
+                            query += "NAME='$name' AND "
+                        }
+                        if (gender != "") {
+                            query += "gender='$gender' and "
+                        }
+                        if (age != "") {
+                            query += "age=$age and "
+                        }
+                        if (addr != "") {
+                            query += "addr='$addr'"
+                        }
+                        if (dno != "") {
+                            query += "dept.dno=$dno"
+                        } else {
+                            query += "true"
+                        }
+                        intent.putExtra("query", query)
+                        setResult(110, intent)
+                        finish()
+                    }
                     RouteUtils.INSERT -> {
                         query = "INSERT INTO emp (name,gender,age,addr) VALUES ('$name','$gender',$age,'$addr');"
                         presenter.updateDataBase(query)
@@ -50,25 +83,25 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
                         query = "UPDATE emp SET name = '$name',gender='$gender',age=$age,addr='$addr' WHERE eno = '$eno'"
                         presenter.updateDataBase(query)
                     }
-                    RouteUtils.DELETE->{
+                    RouteUtils.DELETE -> {
 //                        query="DELETE FROM emp WHERE ENO=$eno AND NAME='$name' AND gender='$gender' and age=$age and addr='$addr'"
-                        query="DELETE FROM emp WHERE "
+                        query = "DELETE FROM emp WHERE "
                         if (eno != "") {
-                            query+="ENO=$eno AND "
+                            query += "ENO=$eno AND "
                         }
-                        if (name!="") {
-                            query+="NAME='$name' AND "
+                        if (name != "") {
+                            query += "NAME='$name' AND "
                         }
                         if (gender != "") {
-                            query+="gender='$gender' and "
+                            query += "gender='$gender' and "
                         }
                         if (age != "") {
-                            query+="age=$age and "
+                            query += "age=$age and "
                         }
                         if (addr != "") {
                             query += "addr='$addr'"
                         } else {
-                            query+="true"
+                            query += "true"
                         }
                         presenter.updateDataBase(query)
                     }

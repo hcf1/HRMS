@@ -13,4 +13,5 @@ public class EmployeeEntity {
     public int mno;
     public String caddr;
     public int dno;
+    public String dname;
 }

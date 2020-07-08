@@ -10,6 +10,7 @@ public class RouteUtils {
     public static final int INSERT = 0;
     public static final int UPDATE = 1;
     public static final int DELETE = 2;
+    public static final int RETRIEVER = 3;
 
     public static void gotoActivity(Context activity, Class clazz) {
         Intent intent = new Intent(activity, clazz);
