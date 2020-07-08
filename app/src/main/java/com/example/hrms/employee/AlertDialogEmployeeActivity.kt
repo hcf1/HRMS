@@ -64,7 +64,7 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
                             query += "age=$age and "
                         }
                         if (addr != "") {
-                            query += "addr='$addr'"
+                            query += "addr='$addr' and "
                         }
                         if (dno != "") {
                             query += "dept.dno=$dno"
