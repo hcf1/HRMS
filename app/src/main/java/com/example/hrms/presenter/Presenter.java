@@ -37,10 +37,13 @@ public class Presenter {
                                 }
                                 if (t.getClass().getName().equals(EmployeeEntity.class.getName())) {
                                     EmployeeEntity employeeEntity = new EmployeeEntity();
+                                    employeeEntity.eno = resultSet.getInt(1);
                                     employeeEntity.name = resultSet.getString(2);
                                     employeeEntity.gender = resultSet.getString(3);
                                     employeeEntity.age = resultSet.getInt(4);
                                     employeeEntity.addr = resultSet.getString(5);
+                                    employeeEntity.mail = resultSet.getString(6);
+                                    employeeEntity.phone = resultSet.getString(7);
                                     list.add((T) employeeEntity);
                                 }
 

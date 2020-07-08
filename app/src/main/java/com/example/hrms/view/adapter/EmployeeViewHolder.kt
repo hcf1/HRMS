@@ -13,4 +13,11 @@ class EmployeeViewHolder(itemView: View) : ViewHolder(itemView) {
     public var ageValue: TextView = itemView.findViewById(R.id.ageValue)
     public var addr: TextView = itemView.findViewById(R.id.addr)
     public var addrValue: TextView = itemView.findViewById(R.id.addrValue)
+    public var mail: TextView = itemView.findViewById(R.id.mail)
+    public var mailValue: TextView = itemView.findViewById(R.id.mailValue)
+    public var phone: TextView = itemView.findViewById(R.id.phone)
+    public var phoneValue: TextView = itemView.findViewById(R.id.phoneValue)
+    public var eno: TextView = itemView.findViewById(R.id.eno)
+    public var enoValue: TextView = itemView.findViewById(R.id.enoValue)
+
 }
