@@ -11,18 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".base.BaseMainActivity"></activity>
         <activity
             android:name=".department.AlertDialogDepartmentActivity"
             android:label="增加部门"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity
             android:name=".employee.AlertDialogEmployeeActivity"
             android:label="添加员工"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
-        <activity android:name=".activitys.Attendance" />
-        <activity android:name=".activitys.Salary" />
-        <activity android:name=".activitys.Department" />
-        <activity android:name=".activitys.Employee" />
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,5 @@
 package com.example.hrms.presenter;
 
-import com.example.hrms.common.RouteUtils;
 import com.example.hrms.entity.DefaultEntity;
 import com.example.hrms.entity.DepartmentEntity;
 import com.example.hrms.entity.EmployeeEntity;
@@ -18,7 +17,7 @@ import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 public class Presenter {
-    private Iview iview = null;
+    private Iview iview;
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
     public Presenter(Iview iview) {

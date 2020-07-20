@@ -1,57 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="33dp"
         android:text="HRMS系统"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="30sp" />
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/employee"
+    </FrameLayout>
+
+    <com.example.hrms.main.MainTabHost
+        android:id="@+id/main_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:text="员工管理"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="5dp">
 
-    <Button
-        android:id="@+id/department"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="部门管理"
-        app:layout_constraintStart_toStartOf="@+id/employee"
-        app:layout_constraintTop_toBottomOf="@+id/employee" />
+    </com.example.hrms.main.MainTabHost>
 
-    <Button
-        android:id="@+id/salary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="薪资管理"
-        app:layout_constraintStart_toStartOf="@+id/department"
-        app:layout_constraintTop_toBottomOf="@+id/department" />
-
-    <Button
-        android:id="@+id/attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:text="考勤管理"
-        app:layout_constraintStart_toStartOf="@+id/salary"
-        app:layout_constraintTop_toBottomOf="@+id/salary" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

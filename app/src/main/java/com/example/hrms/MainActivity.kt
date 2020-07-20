@@ -2,30 +2,35 @@ package com.example.hrms
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.example.hrms.activitys.Attendance
-import com.example.hrms.activitys.Department
-import com.example.hrms.activitys.Employee
-import com.example.hrms.activitys.Salary
-import com.example.hrms.common.RouteUtils
+import com.example.hrms.base.BaseMainActivity
+import com.example.hrms.main.MainTabHost
+import com.example.hrms.main.fragment.AttendanceFragment
+import com.example.hrms.main.fragment.DepartmentFragment
+import com.example.hrms.main.fragment.EmployeeFragment
+import com.example.hrms.main.fragment.SalaryFragment
+import com.example.hrms.main.listener.OnCheckedChangedListener
 import com.example.hrms.model.JdbcManager
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(),View.OnClickListener{
+class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedListener {
+    private lateinit var mainTabHost: MainTabHost
+    private var transaction = supportFragmentManager.beginTransaction()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var thread=Thread {
+        var thread = Thread {
             JdbcManager.init()
         }
         thread?.let {
-            it.priority=Thread.MAX_PRIORITY
+            it.priority = Thread.MAX_PRIORITY
             it.start()
         }
-        employee.setOnClickListener(this)
-        department.setOnClickListener(this)
-        salary.setOnClickListener(this)
-        attendance.setOnClickListener(this)
+        mainTabHost = main_tab
+        mainTabHost.setOnCheckedChangeListener(this)
+        transaction.apply {
+            replace(R.id.fragmentContainer, EmployeeFragment.newInstance())
+        }
+        transaction.commit()
     }
 
     override fun onDestroy() {
@@ -33,12 +38,37 @@ class MainActivity : AppCompatActivity(),View.OnClickListener{
         JdbcManager.onDestroy()
     }
 
-    override fun onClick(p0: View?) {
-        when (p0) {
-            employee -> RouteUtils.gotoActivity(this, Employee::class.java)
-            department -> RouteUtils.gotoActivity(this, Department::class.java)
-            salary -> RouteUtils.gotoActivity(this, Salary::class.java)
-            attendance -> RouteUtils.gotoActivity(this, Attendance::class.java)
+    override fun onClick(selectFunction: View?) {
+
+    }
+
+    override fun onCheckedChange(position: Int) {
+        transaction = supportFragmentManager.beginTransaction()
+        when (position) {
+            1 -> {
+                transaction.apply {
+                    replace(R.id.fragmentContainer, EmployeeFragment.newInstance())
+                }
+                transaction.commit()
+            }
+            2 -> {
+                transaction.apply {
+                    replace(R.id.fragmentContainer, DepartmentFragment())
+                }
+                transaction.commit()
+            }
+            3 -> {
+                transaction.apply {
+                    replace(R.id.fragmentContainer, SalaryFragment())
+                }
+                transaction.commit()
+            }
+            4 -> {
+                transaction.apply {
+                    replace(R.id.fragmentContainer, AttendanceFragment())
+                }
+                transaction.commit()
+            }
         }
     }
 }
