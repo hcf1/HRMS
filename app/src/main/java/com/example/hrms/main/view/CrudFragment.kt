@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -23,9 +20,6 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
     }
 
     protected var presenter: Presenter? = null
-    protected lateinit var executeView: TextView
-    protected lateinit var executeImage: ImageView
-    protected lateinit var executeItem: LinearLayout
     protected lateinit var recyclerView: RecyclerView
     protected var crud: String? = null
     protected var functionModel: String? = null
@@ -49,29 +43,11 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
     }
 
     private fun initData() {
-        executeView.text = crud.toString()
-        when (crud) {
-            CREATE -> {
-                executeImage.setImageResource(R.mipmap.button_view_pager_add)
-            }
-            READ -> {
-                executeImage.setImageResource(R.mipmap.button_view_pager_read)
-            }
-            UPDATE -> {
-                executeImage.setImageResource(R.mipmap.button_view_pager_update)
-            }
-            DELETE -> {
-                executeImage.setImageResource(R.mipmap.button_view_pager_delete)
-            }
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_crud, container, false)
-        executeView = rootView.findViewById(R.id.executeView)
-        executeImage = rootView.findViewById(R.id.executeImage)
-        executeItem = rootView.findViewById(R.id.executeItem)
         recyclerView = rootView.findViewById(R.id.recyclerView)
         initView()
         initData()

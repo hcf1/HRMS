@@ -1,42 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activitys.Employee">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/executeItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/executeView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="查询">
-
-        </TextView>
-
-        <ImageView
-            android:id="@+id/executeImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/button_view_pager_read">
-
-        </ImageView>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:background="#ffffcc"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffffcc"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView

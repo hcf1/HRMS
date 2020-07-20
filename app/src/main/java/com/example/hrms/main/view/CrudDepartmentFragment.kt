@@ -1,7 +1,9 @@
 package com.example.hrms.main.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.example.hrms.common.RouteUtils
@@ -23,25 +25,30 @@ class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment
         return rootView
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun setExecuteButtonListener() {
         super.setExecuteButtonListener()
-        executeItem.setOnClickListener {
-            when (crud.toString()) {
-                CREATE -> {
-                    RouteUtils.gotoInsertDepartmentActivity(context)
-                }
-                READ -> {
-                    presenter?.getAdapterbyQuery(DepartmentEntity(), query)
-                }
-                UPDATE -> {
-                    RouteUtils.gotoUpdateDepartmentActivity(context)
-                }
-                DELETE -> {
-                    RouteUtils.gotoDeleteDepartmentActivity(context)
+        recyclerView.setOnTouchListener { _: View, motionEvent: MotionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
+                when (crud.toString()) {
+                    CREATE -> {
+                        RouteUtils.gotoInsertDepartmentActivity(context)
+                    }
+                    READ -> {
+                        presenter?.getAdapterbyQuery(DepartmentEntity(), query)
+                    }
+                    UPDATE -> {
+                        RouteUtils.gotoUpdateDepartmentActivity(context)
+                    }
+                    DELETE -> {
+                        RouteUtils.gotoDeleteDepartmentActivity(context)
+                    }
                 }
             }
+            false
         }
     }
+
     override fun setAdapterbyQuery(list: MutableList<Any?>?) {
         /**
          * 在数据库查询之后返回了一个新的list，notifyDataSetChanged()这个方法会去检查原先接收到的地址上面检查数据变化，

@@ -1,11 +1,12 @@
 package com.example.hrms.main.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import com.example.hrms.R
 import com.example.hrms.common.RouteUtils
 import com.example.hrms.employee.AlertDialogEmployeeActivity
 import com.example.hrms.entity.EmployeeEntity
@@ -27,25 +28,29 @@ class CrudEmployeeFragment(crud: String, functionModel: String) : CrudFragment(c
         return rootView
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun setExecuteButtonListener() {
         super.setExecuteButtonListener()
-        executeItem.setOnClickListener {
-            when (crud.toString()) {
-                CREATE -> {
-                    RouteUtils.gotoInsertEmployeeActivity(context)
-                }
-                READ -> {
-                    val intent = Intent(context, AlertDialogEmployeeActivity::class.java)
-                    intent.putExtra("tag", RouteUtils.RETRIEVER)
-                    this.startActivityForResult(intent, 110)
-                }
-                UPDATE -> {
-                    RouteUtils.gotoUpdateEmployeeActivity(context)
-                }
-                DELETE -> {
-                    RouteUtils.gotoDeleteEmployeeActivity(context)
+        recyclerView.setOnTouchListener { _: View, motionEvent: MotionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
+                when (crud.toString()) {
+                    CREATE -> {
+                        RouteUtils.gotoInsertEmployeeActivity(context)
+                    }
+                    READ -> {
+                        val intent = Intent(context, AlertDialogEmployeeActivity::class.java)
+                        intent.putExtra("tag", RouteUtils.RETRIEVER)
+                        this.startActivityForResult(intent, 110)
+                    }
+                    UPDATE -> {
+                        RouteUtils.gotoUpdateEmployeeActivity(context)
+                    }
+                    DELETE -> {
+                        RouteUtils.gotoDeleteEmployeeActivity(context)
+                    }
                 }
             }
+            false
         }
     }
 
