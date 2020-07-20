@@ -1,6 +1,7 @@
 package com.example.hrms.main.entity
 
 import androidx.fragment.app.Fragment
+import com.example.hrms.R
 import com.example.hrms.main.view.CrudAttantenceFragment
 import com.example.hrms.main.view.CrudDepartmentFragment
 import com.example.hrms.main.view.CrudEmployeeFragment
@@ -99,6 +100,39 @@ class FragmentManager {
                 }
                 ATTENDANCE -> {
                     return arrayListOf("添加", "查询", "更新", "删除")
+                }
+                else -> null
+            }
+        }
+
+        fun getPagerViewTabs(fragmentId: Int): List<Int>? {
+            return when (fragmentId) {
+                MAIN_FRAGMENT -> {
+                    return arrayListOf()
+                }
+                EMPLOYEE -> {
+                    return arrayListOf(R.mipmap.button_view_pager_add,
+                            R.mipmap.button_view_pager_read,
+                            R.mipmap.button_view_pager_update,
+                            R.mipmap.button_view_pager_delete)
+                }
+                DEPARTMENT -> {
+                    return arrayListOf(R.mipmap.button_view_pager_add,
+                            R.mipmap.button_view_pager_read,
+                            R.mipmap.button_view_pager_update,
+                            R.mipmap.button_view_pager_delete)
+                }
+                SALARY -> {
+                    return arrayListOf(R.mipmap.button_view_pager_add,
+                            R.mipmap.button_view_pager_read,
+                            R.mipmap.button_view_pager_update,
+                            R.mipmap.button_view_pager_delete)
+                }
+                ATTENDANCE -> {
+                    return arrayListOf(R.mipmap.button_view_pager_add,
+                            R.mipmap.button_view_pager_read,
+                            R.mipmap.button_view_pager_update,
+                            R.mipmap.button_view_pager_delete)
                 }
                 else -> null
             }

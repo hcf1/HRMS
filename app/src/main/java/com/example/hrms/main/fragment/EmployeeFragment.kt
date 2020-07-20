@@ -29,6 +29,7 @@ class EmployeeFragment : BaseFragment() {
         }
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = FragmentManager.getFragmentNames(FragmentManager.EMPLOYEE)?.get(position).toString()
+            tab.setIcon(FragmentManager.getPagerViewTabs(FragmentManager.EMPLOYEE)!![position])
         }.attach()
         return rootView
     }

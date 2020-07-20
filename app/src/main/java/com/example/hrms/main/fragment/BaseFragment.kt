@@ -11,7 +11,7 @@ import com.example.hrms.R
 import com.example.hrms.main.entity.FragmentManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
+//todo 待修复：屏幕切换方向导致崩溃，找不到fragment构造器。思路：使用arguments给fragment传递数据，不用构造器
 open class BaseFragment : Fragment() {
     protected lateinit var viewPager: ViewPager2
     protected lateinit var tabLayout: TabLayout
