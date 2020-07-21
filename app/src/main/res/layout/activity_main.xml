@@ -15,11 +15,12 @@
         android:layout_marginTop="33dp"
         android:text="HRMS系统"
         android:textSize="30sp" />
+
     <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
     </FrameLayout>
 
@@ -27,8 +28,7 @@
         android:id="@+id/main_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="5dp">
+        android:layout_gravity="center_horizontal|bottom">
 
     </com.example.hrms.main.MainTabHost>
 

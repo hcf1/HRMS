@@ -35,38 +35,38 @@ public class MainTabHost extends GridLayout {
             public void onClick(View view) {
                 mListener.onCheckedChange(1);
                 tab_main_employee_item.setBackgroundColor(Color.parseColor("#ccccff"));
-                tab_main_department_item.setBackgroundColor(Color.parseColor("#ffffff"));
-                tab_main_salary_item.setBackgroundColor(Color.parseColor("#ffffff"));
-                tab_main_attendance_item.setBackgroundColor(Color.parseColor("#ffffff"));
+                tab_main_department_item.setBackgroundColor(Color.parseColor("#b266ff"));
+                tab_main_salary_item.setBackgroundColor(Color.parseColor("#b266ff"));
+                tab_main_attendance_item.setBackgroundColor(Color.parseColor("#b266ff"));
             }
         });
         tab_main_department_item.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onCheckedChange(2);
-                tab_main_employee_item.setBackgroundColor(Color.parseColor("#ffffff"));
+                tab_main_employee_item.setBackgroundColor(Color.parseColor("#b266ff"));
                 tab_main_department_item.setBackgroundColor(Color.parseColor("#ccccff"));
-                tab_main_salary_item.setBackgroundColor(Color.parseColor("#ffffff"));
-                tab_main_attendance_item.setBackgroundColor(Color.parseColor("#ffffff"));
+                tab_main_salary_item.setBackgroundColor(Color.parseColor("#b266ff"));
+                tab_main_attendance_item.setBackgroundColor(Color.parseColor("#b266ff"));
             }
         });
         tab_main_salary_item.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onCheckedChange(3);
-                tab_main_employee_item.setBackgroundColor(Color.parseColor("#ffffff"));
-                tab_main_department_item.setBackgroundColor(Color.parseColor("#ffffff"));
+                tab_main_employee_item.setBackgroundColor(Color.parseColor("#b266ff"));
+                tab_main_department_item.setBackgroundColor(Color.parseColor("#b266ff"));
                 tab_main_salary_item.setBackgroundColor(Color.parseColor("#ccccff"));
-                tab_main_attendance_item.setBackgroundColor(Color.parseColor("#ffffff"));
+                tab_main_attendance_item.setBackgroundColor(Color.parseColor("#b266ff"));
             }
         });
         tab_main_attendance_item.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onCheckedChange(4);
-                tab_main_employee_item.setBackgroundColor(Color.parseColor("#ffffff"));
-                tab_main_department_item.setBackgroundColor(Color.parseColor("#ffffff"));
-                tab_main_salary_item.setBackgroundColor(Color.parseColor("#ffffff"));
+                tab_main_employee_item.setBackgroundColor(Color.parseColor("#b266ff"));
+                tab_main_department_item.setBackgroundColor(Color.parseColor("#b266ff"));
+                tab_main_salary_item.setBackgroundColor(Color.parseColor("#b266ff"));
                 tab_main_attendance_item.setBackgroundColor(Color.parseColor("#ccccff"));
             }
         });

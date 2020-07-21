@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -11,6 +12,7 @@ import com.example.hrms.R
 import com.example.hrms.presenter.Presenter
 import com.example.hrms.view.Iview
 
+//todo 待修复：屏幕切换方向导致崩溃，找不到fragment构造器。思路：使用arguments给fragment传递数据，不用构造器
 open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview {
     companion object {
         const val CREATE = "添加"
@@ -23,6 +25,7 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
     protected lateinit var recyclerView: RecyclerView
     protected var crud: String? = null
     protected var functionModel: String? = null
+    protected var linearLayout:LinearLayout?= null
 
     init {
         this.crud = crud
@@ -45,6 +48,7 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_crud, container, false)
         recyclerView = rootView.findViewById(R.id.recyclerView)
+        linearLayout=rootView.findViewById(R.id.linearLayout)
         initView()
         initData()
         return rootView

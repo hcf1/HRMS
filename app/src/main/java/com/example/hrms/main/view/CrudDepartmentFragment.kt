@@ -1,6 +1,7 @@
 package com.example.hrms.main.view
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -24,6 +25,7 @@ class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment
         recyclerView.setOnTouchListener { view: View, motionEvent: MotionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
         }
+        linearLayout?.setBackgroundColor(Color.parseColor("#e5e5ff"))
         return rootView
     }
 
