@@ -2,51 +2,29 @@ package com.example.hrms.main.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import com.example.hrms.common.RouteUtils
 import com.example.hrms.entity.DepartmentEntity
 import com.example.hrms.view.adapter.DepartmentAdapter
 
-class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment(crud, functionModel) {
+class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment(crud, functionModel), GestureDetector.OnGestureListener {
     private val query = "SELECT * FROM dept"
     private lateinit var departmentAdapter: DepartmentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = super.onCreateView(inflater, container, savedInstanceState)
         departmentAdapter = DepartmentAdapter()
-        setExecuteButtonListener()
-        return rootView
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    override fun setExecuteButtonListener() {
-        super.setExecuteButtonListener()
-        recyclerView.setOnTouchListener { _: View, motionEvent: MotionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_UP) {
-                when (crud.toString()) {
-                    CREATE -> {
-                        RouteUtils.gotoInsertDepartmentActivity(context)
-                    }
-                    READ -> {
-                        presenter?.getAdapterbyQuery(DepartmentEntity(), query)
-                    }
-                    UPDATE -> {
-                        RouteUtils.gotoUpdateDepartmentActivity(context)
-                    }
-                    DELETE -> {
-                        RouteUtils.gotoDeleteDepartmentActivity(context)
-                    }
-                }
-            }
-            false
+        val gestureDetector=GestureDetector(context,this)
+        recyclerView.setOnTouchListener { view: View, motionEvent: MotionEvent ->
+            gestureDetector.onTouchEvent(motionEvent)
         }
+        return rootView
     }
 
     override fun setAdapterbyQuery(list: MutableList<Any?>?) {
@@ -62,6 +40,47 @@ class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment
         } else {
             recyclerView.adapter = departmentAdapter
             departmentAdapter.list = list as List<DepartmentEntity>
+        }
+    }
+
+    override fun onShowPress(p0: MotionEvent?) {
+        Log.d("hechangfei","onShowPress")
+    }
+
+    override fun onSingleTapUp(p0: MotionEvent?): Boolean {
+        Log.d("hechangfei","onSingleTapUp")
+        return false
+    }
+
+    override fun onDown(p0: MotionEvent?): Boolean {
+        Log.d("hechangfei","onDown")
+        return false
+    }
+
+    override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        Log.d("hechangfei","onFling")
+        return false
+    }
+
+    override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        Log.d("hechangfei","onScroll")
+        return false
+    }
+
+    override fun onLongPress(p0: MotionEvent?) {
+        when (crud.toString()) {
+            CREATE -> {
+                RouteUtils.gotoInsertDepartmentActivity(context)
+            }
+            READ -> {
+                presenter?.getAdapterbyQuery(DepartmentEntity(), query)
+            }
+            UPDATE -> {
+                RouteUtils.gotoUpdateDepartmentActivity(context)
+            }
+            DELETE -> {
+                RouteUtils.gotoDeleteDepartmentActivity(context)
+            }
         }
     }
 }

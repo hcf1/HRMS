@@ -38,10 +38,6 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);//错位布局
     }
 
-    open fun setExecuteButtonListener() {
-
-    }
-
     private fun initData() {
     }
 
