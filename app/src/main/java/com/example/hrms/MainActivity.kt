@@ -1,5 +1,6 @@
 package com.example.hrms
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.hrms.base.BaseMainActivity
@@ -9,7 +10,9 @@ import com.example.hrms.main.fragment.DepartmentFragment
 import com.example.hrms.main.fragment.EmployeeFragment
 import com.example.hrms.main.fragment.SalaryFragment
 import com.example.hrms.main.listener.OnCheckedChangedListener
+import com.example.hrms.metaapp.ShowActivity
 import com.example.hrms.model.JdbcManager
+import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedListener {
@@ -18,6 +21,29 @@ class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initFresco()
+        initJdbc()
+        initFragment()
+        button.setOnClickListener {
+            val intent = Intent(this, ShowActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun initFresco() {
+        Fresco.initialize(this)
+    }
+
+    private fun initFragment() {
+        mainTabHost = main_tab
+        mainTabHost.setOnCheckedChangeListener(this)
+        transaction.apply {
+            replace(R.id.fragmentContainer, EmployeeFragment.newInstance())
+        }
+        transaction.commit()
+    }
+
+    private fun initJdbc() {
         var thread = Thread {
             JdbcManager.init()
         }
@@ -25,12 +51,6 @@ class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedL
             it.priority = Thread.MAX_PRIORITY
             it.start()
         }
-        mainTabHost = main_tab
-        mainTabHost.setOnCheckedChangeListener(this)
-        transaction.apply {
-            replace(R.id.fragmentContainer, EmployeeFragment.newInstance())
-        }
-        transaction.commit()
     }
 
     override fun onDestroy() {
