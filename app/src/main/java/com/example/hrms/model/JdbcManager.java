@@ -22,7 +22,7 @@ public class JdbcManager {
         }
         try {
             if (conn == null) {
-                conn = DriverManager.getConnection("jdbc:mysql://180.76.142.171:3306/HRMS?characterEncoding=utf-8", "root", "sigechoupijiang");
+                conn = DriverManager.getConnection("jdbc:mysql://149.28.83.110:3306/hr?characterEncoding=utf-8", "root", "123456");
             }
         } catch (SQLException e) {
             e.printStackTrace();
