@@ -8,15 +8,17 @@
 
 
     <TextView
+        android:layout_marginBottom="30dp"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="33dp"
-        android:text="HRMS系统"
+        android:text="人力资源管理系统"
         android:textSize="30sp" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

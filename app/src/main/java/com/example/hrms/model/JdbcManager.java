@@ -2,11 +2,13 @@ package com.example.hrms.model;
 
 import com.example.hrms.entity.DefaultEntity;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-
-import java.sql.*;
-
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -22,7 +24,7 @@ public class JdbcManager {
         }
         try {
             if (conn == null) {
-                conn = DriverManager.getConnection("jdbc:mysql://149.28.83.110:3306/hr?characterEncoding=utf-8", "root", "123456");
+                conn = DriverManager.getConnection("jdbc:mysql://202.182.118.120:3306/hr?characterEncoding=utf-8", "root", "123456");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,7 +34,8 @@ public class JdbcManager {
                 if (statement == null) {
                     statement = conn.createStatement();
                 }
-            } else return;
+            } else {
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

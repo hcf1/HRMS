@@ -25,7 +25,6 @@ class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment
         recyclerView.setOnTouchListener { view: View, motionEvent: MotionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
         }
-        linearLayout?.setBackgroundColor(Color.parseColor("#e5e5ff"))
         return rootView
     }
 

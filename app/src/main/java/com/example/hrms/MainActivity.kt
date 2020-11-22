@@ -1,7 +1,9 @@
 package com.example.hrms
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import com.example.hrms.base.BaseMainActivity
 import com.example.hrms.main.MainTabHost
@@ -21,6 +23,7 @@ class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.statusBarColor=Color.parseColor("#9999CC");
         initFresco()
         initJdbc()
         initFragment()
