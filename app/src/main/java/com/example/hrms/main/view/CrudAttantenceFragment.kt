@@ -17,7 +17,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CrudAttantenceFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CrudAttantenceFragment(crud: String, functionModel: String) : CrudFragment(crud, functionModel) {
+class CrudAttantenceFragment: CrudFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,5 +34,12 @@ class CrudAttantenceFragment(crud: String, functionModel: String) : CrudFragment
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_crud_attantence, container, false)
+    }
+    companion object {
+        fun newInstance(crudType: String) = CrudAttantenceFragment().apply {
+            arguments = Bundle().apply {
+                putString(CRUD_TYPE, crudType)
+            }
+        }
     }
 }

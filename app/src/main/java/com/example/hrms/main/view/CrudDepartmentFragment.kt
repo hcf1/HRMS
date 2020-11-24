@@ -9,7 +9,7 @@ import com.example.hrms.common.RouteUtils
 import com.example.hrms.entity.DepartmentEntity
 import com.example.hrms.view.adapter.DepartmentAdapter
 
-class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment(crud, functionModel), GestureDetector.OnGestureListener {
+class CrudDepartmentFragment : CrudFragment(), GestureDetector.OnGestureListener {
     private val query = "SELECT * FROM dept"
     private lateinit var departmentAdapter: DepartmentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +69,7 @@ class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment
     }
 
     override fun onLongPress(p0: MotionEvent?) {
-        when (crud.toString()) {
+        when (crudType) {
             CREATE -> {
                 RouteUtils.gotoInsertDepartmentActivity(context)
             }
@@ -81,6 +81,13 @@ class CrudDepartmentFragment(crud: String, functionModel: String) : CrudFragment
             }
             DELETE -> {
                 RouteUtils.gotoDeleteDepartmentActivity(context)
+            }
+        }
+    }
+    companion object {
+        fun newInstance(crudType: String) = CrudDepartmentFragment().apply {
+            arguments = Bundle().apply {
+                putString(CRUD_TYPE, crudType)
             }
         }
     }

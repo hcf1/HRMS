@@ -22,28 +22,28 @@ class FragmentManager {
         fun initFragment(fragmentId: Int) {
             when (fragmentId) {
                 EMPLOYEE -> {
-                    crudEmployeeFragments = arrayListOf(CrudEmployeeFragment("添加", "添加"),
-                            CrudEmployeeFragment("查询", "查询"),
-                            CrudEmployeeFragment("更新", "更新"),
-                            CrudEmployeeFragment("删除", "删除"))
+                    crudEmployeeFragments = arrayListOf(CrudEmployeeFragment.newInstance("添加"),
+                            CrudEmployeeFragment.newInstance("查询"),
+                            CrudEmployeeFragment.newInstance("更新"),
+                            CrudEmployeeFragment.newInstance("删除"))
                 }
                 DEPARTMENT -> {
-                    crudDepartmentFragments = arrayListOf(CrudDepartmentFragment("添加", "添加"),
-                            CrudDepartmentFragment("查询", "查询"),
-                            CrudDepartmentFragment("更新", "更新"),
-                            CrudDepartmentFragment("删除", "删除"))
+                    crudDepartmentFragments = arrayListOf(CrudDepartmentFragment.newInstance("添加"),
+                            CrudDepartmentFragment.newInstance("查询"),
+                            CrudDepartmentFragment.newInstance("更新"),
+                            CrudDepartmentFragment.newInstance("删除"))
                 }
                 SALARY -> {
-                    crudSalaryFragments = arrayListOf(CrudSalaryFragment("添加", "添加"),
-                            CrudSalaryFragment("查询", "查询"),
-                            CrudSalaryFragment("更新", "更新"),
-                            CrudSalaryFragment("删除", "删除"))
+                    crudSalaryFragments = arrayListOf(CrudSalaryFragment.newInstance("添加"),
+                            CrudSalaryFragment.newInstance("查询"),
+                            CrudSalaryFragment.newInstance("更新"),
+                            CrudSalaryFragment.newInstance("删除"))
                 }
                 ATTENDANCE -> {
-                    crudAttantenceFragments = arrayListOf(CrudAttantenceFragment("添加", "添加"),
-                            CrudAttantenceFragment("查询", "查询"),
-                            CrudAttantenceFragment("更新", "更新"),
-                            CrudAttantenceFragment("删除", "删除"))
+                    crudAttantenceFragments = arrayListOf(CrudAttantenceFragment.newInstance("添加"),
+                            CrudAttantenceFragment.newInstance("查询"),
+                            CrudAttantenceFragment.newInstance("更新"),
+                            CrudAttantenceFragment.newInstance("删除"))
                 }
             }
         }

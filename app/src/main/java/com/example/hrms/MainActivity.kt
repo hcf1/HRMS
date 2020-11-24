@@ -3,7 +3,6 @@ package com.example.hrms
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.view.View
 import com.example.hrms.base.BaseMainActivity
 import com.example.hrms.main.MainTabHost
@@ -47,10 +46,10 @@ class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedL
     }
 
     private fun initJdbc() {
-        var thread = Thread {
-            JdbcManager.init()
+        val thread = Thread {
+            JdbcManager.initConnection()
         }
-        thread?.let {
+        thread.let {
             it.priority = Thread.MAX_PRIORITY
             it.start()
         }

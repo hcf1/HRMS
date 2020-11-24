@@ -33,7 +33,7 @@ public class Presenter {
                     public void call(ResultSet resultSet) {
                         while (true) {
                             try {
-                                if (!resultSet.next()) {
+                                if (resultSet==null||!resultSet.next()) {
                                     break;
                                 }
                                 if (t.getClass().getName().equals(EmployeeEntity.class.getName())) {

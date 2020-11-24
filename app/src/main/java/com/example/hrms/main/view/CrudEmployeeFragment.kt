@@ -9,23 +9,20 @@ import android.view.*
 import com.example.hrms.common.RouteUtils
 import com.example.hrms.employee.AlertDialogEmployeeActivity
 import com.example.hrms.entity.EmployeeEntity
+import com.example.hrms.main.fragment.EmployeeFragment
 import com.example.hrms.view.adapter.EmployeeAdapter
 
-class CrudEmployeeFragment(crud: String, functionModel: String) : CrudFragment(crud, functionModel), GestureDetector.OnGestureListener {
+class CrudEmployeeFragment : CrudFragment(), GestureDetector.OnGestureListener {
     private lateinit var employeeAdapter: EmployeeAdapter
     private var query = "SELECT * FROM emp"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = super.onCreateView(inflater, container, savedInstanceState)
         employeeAdapter = EmployeeAdapter()
-        val gestureDetector=GestureDetector(context,this)
-        recyclerView.setOnTouchListener { view: View, motionEvent: MotionEvent ->
+        val gestureDetector = GestureDetector(context, this)
+        recyclerView.setOnTouchListener { _: View, motionEvent: MotionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
         }
         return rootView
@@ -59,31 +56,31 @@ class CrudEmployeeFragment(crud: String, functionModel: String) : CrudFragment(c
     }
 
     override fun onShowPress(p0: MotionEvent?) {
-        Log.d("hechangfei","onShowPress")
+        Log.d("hechangfei", "onShowPress")
     }
 
     override fun onSingleTapUp(p0: MotionEvent?): Boolean {
-        Log.d("hechangfei","onSingleTapUp")
+        Log.d("hechangfei", "onSingleTapUp")
         return false
     }
 
     override fun onDown(p0: MotionEvent?): Boolean {
-        Log.d("hechangfei","onDown")
+        Log.d("hechangfei", "onDown")
         return false
     }
 
     override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
-        Log.d("hechangfei","onFling")
+        Log.d("hechangfei", "onFling")
         return false
     }
 
     override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
-        Log.d("hechangfei","onScroll")
+        Log.d("hechangfei", "onScroll")
         return false
     }
 
     override fun onLongPress(p0: MotionEvent?) {
-        when (crud.toString()) {
+        when (crudType) {
             CREATE -> {
                 RouteUtils.gotoInsertEmployeeActivity(context)
             }
@@ -99,6 +96,14 @@ class CrudEmployeeFragment(crud: String, functionModel: String) : CrudFragment(c
                 RouteUtils.gotoDeleteEmployeeActivity(context)
             }
         }
-        Log.d("hechangfei","onLongPress")
+        Log.d("hechangfei", "onLongPress")
+    }
+
+    companion object {
+        fun newInstance(crudType: String) = CrudEmployeeFragment().apply {
+            arguments = Bundle().apply {
+                putString(CRUD_TYPE, crudType)
+            }
+        }
     }
 }

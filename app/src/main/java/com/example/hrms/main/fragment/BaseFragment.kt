@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.hrms.R
 import com.google.android.material.tabs.TabLayout
+import kotlin.math.abs
 
 open class BaseFragment : Fragment() {
     protected lateinit var viewPager: ViewPager2
@@ -17,8 +18,9 @@ open class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    /**设置viewPager的切换动画*/
     private val mAnimator = ViewPager2.PageTransformer { page, position ->
-        val absPos = Math.abs(position)
+        val absPos = abs(position)
         page.apply {
             val scale = if (absPos > 1) 0F else 1 - absPos
             scaleX = scale
@@ -37,6 +39,6 @@ open class BaseFragment : Fragment() {
         tabLayout = rootView.findViewById(R.id.ViewPagerTab)
         viewPager = rootView.findViewById(R.id.viewPager)
         viewPager.setPageTransformer(mAnimator)
-        viewPager.adapter=null
+        viewPager.adapter = null
     }
 }

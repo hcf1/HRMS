@@ -12,8 +12,9 @@ import com.example.hrms.R
 import com.example.hrms.presenter.Presenter
 import com.example.hrms.view.Iview
 
-//todo 待修复：屏幕切换方向导致崩溃，找不到fragment构造器。思路：使用arguments给fragment传递数据，不用构造器
-open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview {
+const val CRUD_TYPE = "CRUD_TYPE"
+
+open class CrudFragment : Fragment(), Iview {
     companion object {
         const val CREATE = "添加"
         const val READ = "查询"
@@ -23,17 +24,14 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
 
     protected var presenter: Presenter? = null
     protected lateinit var recyclerView: RecyclerView
-    protected var crud: String? = null
-    protected var functionModel: String? = null
-    protected var linearLayout:LinearLayout?= null
-
-    init {
-        this.crud = crud
-        this.functionModel = functionModel
-    }
+    protected var crudType: String? = null
+    private var linearLayout: LinearLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            crudType = it.getString(CRUD_TYPE)
+        }
     }
 
     open fun initView() {//如果父类中A调用B，子类调用父类A。// 子类一旦重写父类B方法，子类中调用父类A方法时，父类A方法将调用重写后的子类B方法，不再是自己的B方法
@@ -48,7 +46,7 @@ open class CrudFragment(crud: String, functionModel: String) : Fragment(), Iview
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_crud, container, false)
         recyclerView = rootView.findViewById(R.id.recyclerView)
-        linearLayout=rootView.findViewById(R.id.linearLayout)
+        linearLayout = rootView.findViewById(R.id.linearLayout)
         initView()
         initData()
         return rootView

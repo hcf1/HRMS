@@ -16,27 +16,12 @@ public class JdbcManager {
     public static Connection conn = null;
     public static Statement statement = null;
 
-    public static void init() {
+    public static void initConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (conn == null) {
-                conn = DriverManager.getConnection("jdbc:mysql://202.182.118.120:3306/hr?characterEncoding=utf-8", "root", "123456");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (conn != null) {
-                if (statement == null) {
-                    statement = conn.createStatement();
-                }
-            } else {
-            }
-        } catch (SQLException e) {
+            conn = DriverManager.getConnection("jdbc:mysql://202.182.118.120:3306/hr?characterEncoding=utf-8", "root", "123456");
+            statement = conn.createStatement();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -47,9 +32,9 @@ public class JdbcManager {
                 .map(new Func1<String, ResultSet>() {
                     @Override
                     public ResultSet call(String s) {
-                        init();
                         ResultSet resultSet = null;
                         try {
+                            checkAndConnectMySql();
                             resultSet = statement.executeQuery(s);
                         } catch (SQLException e) {
                             e.printStackTrace();
@@ -67,9 +52,9 @@ public class JdbcManager {
                 .map(new Func1<String, DefaultEntity>() {
                     @Override
                     public DefaultEntity call(String s) {
-                        init();
                         DefaultEntity defaultEntity = new DefaultEntity();
                         try {
+                            checkAndConnectMySql();
                             defaultEntity.affectedRows = statement.executeUpdate(s);
                         } catch (SQLException e) {
                             e.printStackTrace();
@@ -78,6 +63,12 @@ public class JdbcManager {
 
                     }
                 });
+    }
+
+    private static void checkAndConnectMySql() throws SQLException {
+        if (conn == null || statement == null || conn.isClosed() || statement.isClosed()) {
+            initConnection();
+        }
     }
 
     public static void onDestroy() throws SQLException {
