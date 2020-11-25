@@ -3,7 +3,6 @@ package com.example.hrms
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import com.example.hrms.base.BaseMainActivity
 import com.example.hrms.main.MainTabHost
 import com.example.hrms.main.fragment.AttendanceFragment
@@ -13,55 +12,36 @@ import com.example.hrms.main.fragment.SalaryFragment
 import com.example.hrms.main.listener.OnCheckedChangedListener
 import com.example.hrms.metaapp.ShowActivity
 import com.example.hrms.model.JdbcManager
-import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedListener {
+class MainActivity : BaseMainActivity(), OnCheckedChangedListener {
     private lateinit var mainTabHost: MainTabHost
     private var transaction = supportFragmentManager.beginTransaction()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        window.statusBarColor=Color.parseColor("#9999CC");
-        initFresco()
-        initJdbc()
+        window.statusBarColor = Color.parseColor("#9999CC");
         initFragment()
+        /**metaApp图片浏览代码遗留*/
         button.setOnClickListener {
             val intent = Intent(this, ShowActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun initFresco() {
-        Fresco.initialize(this)
-    }
-
     private fun initFragment() {
         mainTabHost = main_tab
         mainTabHost.setOnCheckedChangeListener(this)
         transaction.apply {
-            replace(R.id.fragmentContainer, EmployeeFragment.newInstance())
+            replace(R.id.fragmentContainer, EmployeeFragment())
         }
         transaction.commit()
     }
 
-    private fun initJdbc() {
-        val thread = Thread {
-            JdbcManager.initConnection()
-        }
-        thread.let {
-            it.priority = Thread.MAX_PRIORITY
-            it.start()
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
         JdbcManager.onDestroy()
-    }
-
-    override fun onClick(selectFunction: View?) {
-
     }
 
     override fun onCheckedChange(position: Int) {
@@ -69,7 +49,7 @@ class MainActivity : BaseMainActivity(), View.OnClickListener, OnCheckedChangedL
         when (position) {
             1 -> {
                 transaction.apply {
-                    replace(R.id.fragmentContainer, EmployeeFragment.newInstance())
+                    replace(R.id.fragmentContainer, EmployeeFragment())
                 }
                 transaction.commit()
             }

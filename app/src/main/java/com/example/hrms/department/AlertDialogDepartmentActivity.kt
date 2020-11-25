@@ -86,7 +86,7 @@ class AlertDialogDepartmentActivity : AppCompatActivity(), Iview {
         return date.toString()
     }
 
-    override fun setAdapterbyQuery(list: MutableList<Any?>?) {
+    override fun setAdapterByQuery(list: MutableList<Any?>?) {
         TODO("Not yet implemented")
     }
 

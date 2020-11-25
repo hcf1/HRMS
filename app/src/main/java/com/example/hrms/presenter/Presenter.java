@@ -63,7 +63,7 @@ public class Presenter {
 
                         }
                         try {
-                            iview.setAdapterbyQuery(list);
+                            iview.setAdapterByQuery(list);
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }

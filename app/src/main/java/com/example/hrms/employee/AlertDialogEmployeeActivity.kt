@@ -114,7 +114,7 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
         }
     }
 
-    override fun setAdapterbyQuery(list: MutableList<Any?>?) {
+    override fun setAdapterByQuery(list: MutableList<Any?>?) {
         TODO("Not yet implemented")
     }
 

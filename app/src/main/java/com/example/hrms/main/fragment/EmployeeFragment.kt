@@ -33,8 +33,4 @@ class EmployeeFragment : BaseFragment() {
         }.attach()
         return rootView
     }
-
-    companion object {
-        fun newInstance() = EmployeeFragment()
-    }
 }

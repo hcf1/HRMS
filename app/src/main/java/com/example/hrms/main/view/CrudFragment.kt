@@ -34,7 +34,7 @@ open class CrudFragment : Fragment(), Iview {
         }
     }
 
-    open fun initView() {//如果父类中A调用B，子类调用父类A。// 子类一旦重写父类B方法，子类中调用父类A方法时，父类A方法将调用重写后的子类B方法，不再是自己的B方法
+    open fun initView() {
         presenter = Presenter(this)
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);//错位布局
     }
@@ -52,7 +52,7 @@ open class CrudFragment : Fragment(), Iview {
         return rootView
     }
 
-    override fun setAdapterbyQuery(list: MutableList<Any?>?) {
+    override fun setAdapterByQuery(list: MutableList<Any?>?) {
 
     }
 

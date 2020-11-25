@@ -60,7 +60,26 @@ public class JdbcManager {
                             e.printStackTrace();
                         }
                         return defaultEntity;
+                    }
+                });
+    }
 
+    public static Observable<ResultSet> executeLogin(String querySting) {
+        return Observable.just(querySting)
+                .observeOn(Schedulers.io())
+                .map(new Func1<String, ResultSet>() {
+                    @Override
+                    public ResultSet call(String s) {
+                        ResultSet resultSet = null;
+                        try {
+                            checkAndConnectMySql();
+                            statement.executeUpdate(s);
+                            resultSet = statement.executeQuery("SELECT LAST_INSERT_ID()");
+                            return resultSet;
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        return resultSet;
                     }
                 });
     }

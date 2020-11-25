@@ -38,8 +38,8 @@ class CrudEmployeeFragment : CrudFragment(), GestureDetector.OnGestureListener {
         }
     }
 
-    override fun setAdapterbyQuery(list: MutableList<Any?>?) {
-        super.setAdapterbyQuery(list)
+    override fun setAdapterByQuery(list: MutableList<Any?>?) {
+        super.setAdapterByQuery(list)
         /**
          * 在数据库查询之后返回了一个新的list，notifyDataSetChanged()这个方法会去检查原先接收到的地址上面检查数据变化，
          * 但是从数据库查询的结果是返回了一个新的list，并不是对原list的更改。
