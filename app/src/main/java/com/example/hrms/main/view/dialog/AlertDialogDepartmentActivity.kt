@@ -1,4 +1,4 @@
-package com.example.hrms.department
+package com.example.hrms.main.view.dialog
 
 import android.os.Bundle
 import android.util.Log

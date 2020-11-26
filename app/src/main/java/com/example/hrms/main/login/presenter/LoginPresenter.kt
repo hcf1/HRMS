@@ -5,7 +5,7 @@ import com.example.hrms.common.Crafter
 import com.example.hrms.main.login.view.LoginView
 import com.example.hrms.main.login.view.SignUpView
 import com.example.hrms.model.JdbcManager
-import com.example.hrms.model.UserInfo
+import com.example.hrms.main.login.model.UserInfo
 import rx.android.schedulers.AndroidSchedulers
 import rx.subscriptions.CompositeSubscription
 

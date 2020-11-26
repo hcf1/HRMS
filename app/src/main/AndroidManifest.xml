@@ -21,11 +21,11 @@
         <activity android:name=".metaapp.ShowActivity" />
         <activity android:name=".base.BaseMainActivity" />
         <activity
-            android:name=".department.AlertDialogDepartmentActivity"
+            android:name=".main.view.dialog.AlertDialogDepartmentActivity"
             android:label="增加部门"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity
-            android:name=".employee.AlertDialogEmployeeActivity"
+            android:name=".main.view.dialog.AlertDialogEmployeeActivity"
             android:label="添加员工"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity android:name=".MainActivity" />

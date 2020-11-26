@@ -1,58 +1,105 @@
 package com.example.hrms.main.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.hrms.MainActivity
 import com.example.hrms.R
+import com.example.hrms.common.Crafter
+import com.example.hrms.main.entity.AttendanceEntity
+import com.example.hrms.main.presenter.AttendancePresenter
+import com.example.hrms.main.view.AttendanceView
+import com.example.hrms.presenter.Presenter
+import kotlinx.android.synthetic.main.fragment_attendance.*
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AttendanceFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AttendanceFragment : BaseFragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+open class AttendanceFragment : Fragment(),AttendanceView {
+    private var presenter: AttendancePresenter= AttendancePresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_attendance, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AttendanceFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                AttendanceFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        titleMessage.text = "您好！${Crafter.instance.currentUser.name}，您的id是${Crafter.instance.currentUser.id}"
+        loginOrSignUpRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when(checkedId){
+                retrieve.id->{
+                    userId.isEnabled=true
+                    leaveReason.setText("")
+                    leaveReason.isEnabled=false
                 }
+                askForLeave.id->{
+                    userId.isEnabled=true
+                    leaveReason.isEnabled=true
+                }
+                cancelLeave.id->{
+                    userId.isEnabled=true
+                    leaveReason.setText("")
+                    leaveReason.isEnabled=false
+                }
+            }
+        }
+        nextStepButton.setOnClickListener {
+            when {
+                retrieve.isChecked -> {
+                    presenter.queryLeaveStatus(AttendanceEntity(),"select emp.`name`, attend.abool,attend.ahbool,attend.leave_reason,attend.adate\n" +
+                            "from emp,attend\n" +
+                            "where emp.eno=${userId.text} and emp.eno=attend.eno")
+                }
+                askForLeave.isChecked -> {
+                    presenter.setLeaveStatus("insert into attend(eno,abool,ahbool,leave_reason,adate)\n" +
+                            "values(${userId.text},0,1,'${leaveReason.text}','${getDate()}')")
+                }
+                cancelLeave.isChecked -> {
+                    presenter.setLeaveStatus("update attend\n" +
+                            "set attend.abool=1,attend.ahbool=0,attend.leave_reason=NULL\n" +
+                            "where attend.eno=${userId.text}")
+                }
+            }
+        }
+    }
+    override fun attendanceStatus(attendanceEntity: AttendanceEntity?, success: Boolean, extraMessage: String?) {
+        if (extraMessage != null) {
+            /**在主线程中支持ui操作*/
+            retrieve.post {
+                val toast= Toast.makeText(context, extraMessage, Toast.LENGTH_SHORT)
+                toast.setText(extraMessage)
+                toast.show()
+            }
+        }
+        if (success&&attendanceEntity!=null) {
+            resultName.apply {
+                visibility=View.VISIBLE
+                text="用户名：${attendanceEntity.name}"
+            }
+            resultStatus.apply {
+                visibility=View.VISIBLE
+                text=attendanceEntity.attendanceStatus
+            }
+            resultDatetime.apply {
+                visibility=View.VISIBLE
+                text=attendanceEntity.datetime
+            }
+        }
+    }
+    private fun getDate(): String {
+        val utilDate = Date() //util.Date
+        var date=java.sql.Date(utilDate.time)
+        return date.toString()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 }

@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import com.example.hrms.common.RouteUtils
-import com.example.hrms.employee.AlertDialogEmployeeActivity
+import com.example.hrms.main.view.dialog.AlertDialogEmployeeActivity
 import com.example.hrms.entity.EmployeeEntity
 import com.example.hrms.view.adapter.EmployeeAdapter
 

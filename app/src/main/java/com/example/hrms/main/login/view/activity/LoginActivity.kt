@@ -10,7 +10,7 @@ import com.example.hrms.main.login.presenter.LoginPresenter
 import com.example.hrms.main.login.view.LoginView
 import com.example.hrms.main.login.view.SignUpView
 import com.example.hrms.model.JdbcManager
-import com.example.hrms.model.UserInfo
+import com.example.hrms.main.login.model.UserInfo
 import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -28,10 +28,12 @@ class LoginActivity : AppCompatActivity(), SignUpView, LoginView {
         loginOrSignUpRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == login.id) {
                 name.isEnabled = false
+                name.setText("")
                 id.isEnabled = true
             } else {
                 name.isEnabled = true
                 id.isEnabled = false
+                id.setText("")
             }
         }
         nextStepButton.setOnClickListener {

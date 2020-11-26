@@ -3,6 +3,7 @@ package com.example.hrms
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.WindowManager
 import com.example.hrms.base.BaseMainActivity
 import com.example.hrms.main.MainTabHost
 import com.example.hrms.main.fragment.AttendanceFragment
@@ -21,6 +22,7 @@ class MainActivity : BaseMainActivity(), OnCheckedChangedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.statusBarColor = Color.parseColor("#9999CC");
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)//元素不被键盘顶起
         initFragment()
         /**metaApp图片浏览代码遗留*/
         button.setOnClickListener {

@@ -3,8 +3,8 @@ package com.example.hrms.common;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.hrms.department.AlertDialogDepartmentActivity;
-import com.example.hrms.employee.AlertDialogEmployeeActivity;
+import com.example.hrms.main.view.dialog.AlertDialogDepartmentActivity;
+import com.example.hrms.main.view.dialog.AlertDialogEmployeeActivity;
 
 public class RouteUtils {
     public static final int INSERT = 0;

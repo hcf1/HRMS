@@ -1,4 +1,4 @@
-package com.example.hrms.model
+package com.example.hrms.main.login.model
 
 /**暂时仅为登录及考勤管理服务*/
 class UserInfo {

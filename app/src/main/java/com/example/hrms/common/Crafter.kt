@@ -1,6 +1,6 @@
 package com.example.hrms.common
 
-import com.example.hrms.model.UserInfo
+import com.example.hrms.main.login.model.UserInfo
 
 /**kotlin单例模式
  * 这是一个全局共享类
@@ -11,5 +11,5 @@ class Crafter private constructor() {
             Crafter()
         }
     }
-    var currentUser:UserInfo=UserInfo()
+    var currentUser: UserInfo = UserInfo()
 }
