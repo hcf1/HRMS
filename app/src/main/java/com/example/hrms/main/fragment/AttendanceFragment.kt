@@ -31,29 +31,33 @@ open class AttendanceFragment : Fragment(),AttendanceView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
+    private fun initView() {
         titleMessage.text = "您好！${Crafter.instance.currentUser.name}，您的id是${Crafter.instance.currentUser.id}"
         loginOrSignUpRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            when(checkedId){
-                retrieve.id->{
-                    userId.isEnabled=true
+            when (checkedId) {
+                retrieve.id -> {
+                    userId.isEnabled = true
                     leaveReason.setText("")
-                    leaveReason.isEnabled=false
+                    leaveReason.isEnabled = false
                 }
-                askForLeave.id->{
-                    userId.isEnabled=true
-                    leaveReason.isEnabled=true
+                askForLeave.id -> {
+                    userId.isEnabled = true
+                    leaveReason.isEnabled = true
                 }
-                cancelLeave.id->{
-                    userId.isEnabled=true
+                cancelLeave.id -> {
+                    userId.isEnabled = true
                     leaveReason.setText("")
-                    leaveReason.isEnabled=false
+                    leaveReason.isEnabled = false
                 }
             }
         }
         nextStepButton.setOnClickListener {
             when {
                 retrieve.isChecked -> {
-                    presenter.queryLeaveStatus(AttendanceEntity(),"select emp.`name`, attend.abool,attend.ahbool,attend.leave_reason,attend.adate\n" +
+                    presenter.queryLeaveStatus(AttendanceEntity(), "select emp.`name`, attend.abool,attend.ahbool,attend.leave_reason,attend.adate\n" +
                             "from emp,attend\n" +
                             "where emp.eno=${userId.text} and emp.eno=attend.eno")
                 }
@@ -69,6 +73,7 @@ open class AttendanceFragment : Fragment(),AttendanceView {
             }
         }
     }
+
     override fun attendanceStatus(attendanceEntity: AttendanceEntity?, success: Boolean, extraMessage: String?) {
         if (extraMessage != null) {
             /**在主线程中支持ui操作*/
@@ -95,7 +100,7 @@ open class AttendanceFragment : Fragment(),AttendanceView {
     }
     private fun getDate(): String {
         val utilDate = Date() //util.Date
-        var date=java.sql.Date(utilDate.time)
+        val date=java.sql.Date(utilDate.time)
         return date.toString()
     }
     override fun onDestroy() {
