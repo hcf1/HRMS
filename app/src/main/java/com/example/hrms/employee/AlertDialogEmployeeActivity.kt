@@ -23,7 +23,7 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
         presenter = Presenter(this)
         if (intent.extras != null) {
             when (intent.extras!!.getInt("tag")) {
-                RouteUtils.RETRIEVER -> {
+                RouteUtils.RETRIEVE -> {
                     dnoItem.visibility = View.VISIBLE
                     this.title = "查询员工"
                 }
@@ -47,7 +47,7 @@ class AlertDialogEmployeeActivity() : AppCompatActivity(), Iview {
             var dno=dnoValue.text.toString()
             if (intent.extras != null) {
                 when (intent.extras!!.getInt("tag")) {
-                    RouteUtils.RETRIEVER -> {
+                    RouteUtils.RETRIEVE -> {
                         query = ""
 //                        "SELECT emp.eno,emp.name,emp.gender,emp.age,emp.addr,emp.mail,emp.phonenum,dept.dname FROM emp,dept WHERE emp.eno=1"
                         query = "SELECT emp.eno,emp.name,emp.gender,emp.age,emp.addr,emp.mail,emp.phonenum,dept.dname FROM emp,dept WHERE "

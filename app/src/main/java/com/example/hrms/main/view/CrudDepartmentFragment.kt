@@ -74,7 +74,7 @@ class CrudDepartmentFragment : CrudFragment(), GestureDetector.OnGestureListener
                 RouteUtils.gotoInsertDepartmentActivity(context)
             }
             READ -> {
-                presenter?.getAdapterbyQuery(DepartmentEntity(), query)
+                presenter?.getAdapterByQuery(DepartmentEntity(), query)
             }
             UPDATE -> {
                 RouteUtils.gotoUpdateDepartmentActivity(context)

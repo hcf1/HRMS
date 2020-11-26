@@ -2,14 +2,12 @@ package com.example.hrms.main.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import com.example.hrms.common.RouteUtils
 import com.example.hrms.employee.AlertDialogEmployeeActivity
 import com.example.hrms.entity.EmployeeEntity
-import com.example.hrms.main.fragment.EmployeeFragment
 import com.example.hrms.view.adapter.EmployeeAdapter
 
 class CrudEmployeeFragment : CrudFragment(), GestureDetector.OnGestureListener {
@@ -34,7 +32,7 @@ class CrudEmployeeFragment : CrudFragment(), GestureDetector.OnGestureListener {
             if (data != null) {
                 query = data.getStringExtra("query").toString()
             }
-            presenter?.getAdapterbyQuery(EmployeeEntity(), query)
+            presenter?.getAdapterByQuery(EmployeeEntity(), query)
         }
     }
 
@@ -86,7 +84,7 @@ class CrudEmployeeFragment : CrudFragment(), GestureDetector.OnGestureListener {
             }
             READ -> {
                 val intent = Intent(context, AlertDialogEmployeeActivity::class.java)
-                intent.putExtra("tag", RouteUtils.RETRIEVER)
+                intent.putExtra("tag", RouteUtils.RETRIEVE)
                 this.startActivityForResult(intent, 110)
             }
             UPDATE -> {

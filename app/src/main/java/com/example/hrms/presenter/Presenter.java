@@ -24,7 +24,7 @@ public class Presenter {
         this.iview = iview;
     }
 
-    public <T> void getAdapterbyQuery(final T t, String query) throws ClassNotFoundException {
+    public <T> void getAdapterByQuery(final T t, String query) throws ClassNotFoundException {
         final List<T> list = new ArrayList<>();
         Subscription subscription = JdbcManager.query(query)
                 .observeOn(AndroidSchedulers.mainThread())//在主线程中操作UI
